@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xyz.zrxjuly.dao.IBookDao" >
+	<select id="selectBookCheck_0" parameterType="String" resultType="Integer">
+		SELECT COUNT(1) 
+		  FROM t_book 
+		 WHERE u_id = #{u_id} 
+		   AND b_check=0
+	</select>
+	<select id="selectBookCheck_1" parameterType="String" resultType="Integer">
+		SELECT COUNT(1) 
+		  FROM t_book 
+		 WHERE u_id = #{u_id} 
+		   AND b_check=1
+	</select>
+	<select id="selectBookCheck_2" parameterType="String" resultType="Integer">
+		SELECT COUNT(1) 
+		  FROM t_book 
+		 WHERE u_id = #{u_id} 
+		   AND b_check=2
+	</select>
+	<select id="selectBookCheck_3" parameterType="String" resultType="Integer">
+		SELECT COUNT(1) 
+		  FROM t_book 
+		 WHERE u_id = #{u_id} 
+		   AND b_check=3
+	</select>
+	<select id="selectBookDonateSuccess" parameterType="String" resultType="Book">
+		SELECT b_id,u_id,b_name,b_author,b_publish,b_pdate,b_checkdate,b_date,b_check 
+          FROM t_book 
+         WHERE u_id = #{u_id}
+           AND b_check=1
+      ORDER BY b_date DESC
+         LIMIT 1
+	</select>
+	
+	<insert id="addBook" parameterType="Book">
+		INSERT INTO t_book(b_id,u_id,b_name,b_author,b_publish,b_pdate,b_check)
+		     VALUES (UUID(),#{u_id},#{b_name},#{b_author},#{b_publish},#{b_pdate},0)
+	</insert>
+	
+	<select id="getDonationBookByUserId" parameterType="String" resultType="Book">
+		SELECT b_id,u_id,b_name,b_author,b_publish,b_pdate,b_checkdate,b_date,b_check
+		  FROM t_book
+		 WHERE u_id = #{u_id}
+		   AND b_check = 3
+	</select>
+	
+	<select id="getBookCheck_0" parameterType="String" resultType="Book">
+		SELECT b_id,u_id,b_name,b_author,b_publish,b_pdate,b_checkdate,b_date,b_check
+		  FROM t_book
+		 WHERE u_id = #{u_id}
+		   AND b_check = 0
+	</select>
+	
+	<select id="getBookCheck_1" parameterType="String" resultType="Book">
+		SELECT b_id,u_id,b_name,b_author,b_publish,b_pdate,b_checkdate,b_date,b_check
+		  FROM t_book
+		 WHERE u_id = #{u_id}
+		   AND b_check = 1
+	</select>
+	
+	<select id="getBookCheck_2" parameterType="String" resultType="Book">
+		SELECT b_id,u_id,b_name,b_author,b_publish,b_pdate,b_checkdate,b_date,b_check
+		  FROM t_book
+		 WHERE u_id = #{u_id}
+		   AND b_check = 2
+	</select>
+	
+	<delete id="deleteCheck0" parameterType="String">
+		DELETE FROM t_book
+		      WHERE b_id = #{b_id}
+	</delete>
+	
+	<select id="getBookCheck0" parameterType="String" resultType="Book">
+		SELECT b_id,u_id,b_name,b_author,b_publish,b_pdate,b_checkdate,b_date,b_check
+		  FROM t_book
+		 WHERE b_id = #{b_id}
+		   AND b_check = 0
+	</select>
+	
+	<update id="editBookInfo" parameterType="Book">
+		UPDATE t_book
+		   SET b_name = #{b_name}, b_author = #{b_author}, b_publish = #{b_publish}, b_pdate = #{b_pdate}
+		 WHERE b_id = #{b_id}
+		   AND u_id = #{u_id}
+	</update>
+	
+	<select id="adminGetBookCheck_0" resultType="Book">
+		SELECT b_id,u_id,b_name,b_author,b_publish,b_pdate,b_checkdate,b_date,b_check
+		  FROM t_book
+		 WHERE b_check = 0
+	</select>
+	
+	<select id="adminGetBookCheck_1" resultType="Book">
+		SELECT b_id,u_id,b_name,b_author,b_publish,b_pdate,b_checkdate,b_date,b_check
+		  FROM t_book
+		 WHERE  b_check = 1
+	</select>
+	
+	<select id="adminGetBookCheck_2" resultType="Book">
+		SELECT b_id,u_id,b_name,b_author,b_publish,b_pdate,b_checkdate,b_date,b_check
+		  FROM t_book
+		 WHERE  b_check = 2
+	</select>
+	
+	<!-- 管理员审核图书-通过审核 -->
+	<update id="adminCheck_0Success" parameterType="String">
+		UPDATE t_book
+		   SET b_check = 1,b_checkdate = CURDATE()
+		 WHERE b_id = #{b_id}
+	</update>
+	
+	<!-- 管理员-用户已将图书捐赠给图书馆- -->
+	<update id="adminCheck_3Success" parameterType="String">
+		UPDATE t_book
+		   SET b_check = 3,b_date = CURDATE()
+		 WHERE b_id = #{b_id}
+	</update>
+	
+	<!-- 管理员审核图书-不通过审核 -->
+	<update id="adminCheckNo" parameterType="String">
+		UPDATE t_book
+		   SET b_check = 2,b_checkdate = CURDATE()
+		 WHERE b_id = #{b_id}
+	</update>
+	
+	<!-- 管理员-获取捐赠的图书 -->
+	<select id="getDonationBook" resultType="Book">
+		SELECT b_id,u_id,b_name,b_author,b_publish,b_pdate,b_checkdate,b_date,b_check
+		  FROM t_book
+		 WHERE b_check = 3
+	  ORDER BY b_date DESC
+	</select>
+</mapper>

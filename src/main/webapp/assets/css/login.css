@@ -1,0 +1,58 @@
+@charset "utf-8";
+/* CSS reset */
+*{ font-family:"microsoft yahei",simsun,Tahoma,sans-serif;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { margin:0; padding:0; }
+fieldset,img {border:0; }
+ol,ul {list-style:none; }
+h1,h2,h3,h4,h5,h6,button,input,select,textarea {font-size:100%;}
+button::-moz-focus-inner,input::-moz-focus-inner{padding:0; border:0;}
+table {border-collapse:collapse;border-spacing:0;}
+i, cite, em, var, dfn, address {font-style: normal;}
+body{ font-size:14px;}
+a{color: #313131;text-decoration: none; }
+a:hover{text-decoration: underline;}
+a:active, a:focus{outline:none}
+a[href^="http://tongji.baidu.com"]{display: none;}
+.fl{float: left;}
+.fr{float: right;}
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; font-size:0;}
+.clearfix{zoom:1;clear:both;}
+.clear{clear:both; height:0; line-height:0; font-size:0;}
+.hidden,.none{display: none;}
+
+
+
+/*.w1060{ width:1060px; height:auto; margin:0 auto;}*/
+.padding_nei{ /*写padding不撑开*/
+	-webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    -o-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.main01 .sousuo div{    
+	-webkit-border-radius: 17px;
+    -moz-border-radius: 17px;
+    -ms-border-radius:17px;
+    -o-border-radius:17px; 
+	border-radius:17px;	
+	}
+	
+.w1100{ width:1100px; height:auto; margin:0 auto;}
+.w1096{ width:1096px; height:auto; margin:0 auto;}
+
+
+/*登录页面*/
+/*
+*/
+.zhuce_body .zhuce_kong{ position:absolute; top:50%; left:50%; width:600px; height:478px; margin-left:-300px; margin-top:-239px;opacity: 0.9;}
+.login_bj{ background:url(../avatars/timg.jpg) top center no-repeat; background-size:cover;}
+.zhuce_body .login_kuang{ position:absolute; top:60%; left:50%; width:512px; height:325px; margin-left:-256px; margin-top:-162px;}
+.zhuce_body .login_kuang .zc{ width:512px; height:auto;}
+.zhuce_body .login_kuang .zc .bj_bai{ float:left; width:261px; height:256px;margin-left:20%; padding-left:38px; background:#FFF;}
+.zhuce_body .login_kuang .zc .bj_bai h3{ font:16px/70px "微软雅黑", "黑体"; color:#37b5f9; width:270px; text-align:left;}
+.zhuce_body .login_kuang .zc .bj_right{ float:left;width:173px; height:256px; padding-left:37px; background:#f8f8f8;}
+.zhuce_body .login_kuang .zc .bj_bai .kuang_txt{ width:220px; height:32px; border:1px solid #dddddd; background:#faffbd; line-height:32px; padding-left:4px; color:#b1a9a9;  margin-bottom:10px; }
+.zhuce_body .login_kuang .zc .bj_bai a{ color:#37b5f9; float:right; margin-right:35px;}
+.zhuce_body .login_kuang .zc .bj_bai .btn_zhuce{ width:227px; height:33px; background:#37b5f9; font-size:14px; line-height:33px; text-align:center; border:0px; color:#fff; border-radius:3px; cursor:pointer;}
+.zhuce_body .login_kuang .zc .bj_bai .btn_zhuce:hover,.login_qita_kuang .zc .left .btn_zhuce:hover{ background:#0065d0;}

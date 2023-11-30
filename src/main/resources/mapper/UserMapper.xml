@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xyz.zrxjuly.dao.IUserDao" >
+	<select id="selectByPrimaryKey" parameterType="Integer" resultType="User">
+		SELECT * FROM user WHERE id = #{userId}
+	</select>
+	
+	<select id="selectUser" parameterType="User" resultType="User">
+		SELECT u_id,u_account,u_name,u_pwd,u_class,u_sex,u_phone,u_email,u_role
+		  FROM t_user
+		 WHERE u_account=#{u_account}
+		   AND u_pwd=#{u_pwd}
+		   AND u_role=#{u_role}
+	</select>
+	
+	<update id="editPwd" parameterType="User">
+		UPDATE t_user 
+		   SET u_pwd = #{u_pwd}
+		 WHERE u_id = #{u_id}
+	</update>
+	
+	<update id="editUserInfo" parameterType="User">
+		UPDATE t_user
+		<if test="u_pwd != null and u_pwd != ''">
+		  SET u_pwd = #{u_pwd}
+		</if>
+		<if test="u_name != null and u_name != ''">
+		   SET u_name = #{u_name},u_sex = #{u_sex},u_phone = #{u_phone},u_email = #{u_email}
+		</if>
+		 WHERE u_id = #{u_id}
+	</update>
+	
+	<!-- 管理员-查询所有用户信息 -->
+	<select id="getAllUser" resultType="User">
+		SELECT u_id,u_account,u_name,u_class,u_sex,u_phone,u_email,u_role
+		  FROM t_user
+		 WHERE u_role = 1
+	</select>
+	
+	<!-- 管理员-删除用户 -->
+	<delete id="adminDelUserByUserId" parameterType="String">
+		DELETE FROM t_user
+		      WHERE u_id = #{u_id}
+	</delete>
+	
+	<select id="adminGetUserById" parameterType="String" resultType="User">
+		SELECT u_id,u_account,u_name,u_class,u_sex,u_phone,u_email,u_role
+		  FROM t_user
+		 WHERE u_role = 1
+		   AND u_id = #{u_id}
+	</select>
+</mapper>
