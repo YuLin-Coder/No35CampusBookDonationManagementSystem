@@ -32,8 +32,10 @@ public class LoginController {
 	@RequestMapping("user_index")
 	public String user_index(User user, HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) throws IOException, ServletException {
-		
-		User userinfo = userService.selectUser(user);
+		User userinfo = (User) session.getAttribute("userinfo");
+		if (userinfo == null) {
+			userinfo = userService.selectUser(user);
+		}
 		if (userinfo != null) {
 			session.setAttribute("userinfo", userinfo);
 			if (user.getU_role() == 0) {
